@@ -11,9 +11,9 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/infracloudio/msbotbuilder-go/core"
-	"github.com/infracloudio/msbotbuilder-go/core/activity"
-	"github.com/infracloudio/msbotbuilder-go/schema"
+	"github.com/risboo6909/msbotbuilder-go/core"
+	"github.com/risboo6909/msbotbuilder-go/core/activity"
+	"github.com/risboo6909/msbotbuilder-go/schema"
 )
 
 func putRequest(u string, data []byte) error {

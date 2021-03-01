@@ -21,7 +21,7 @@ package client
 
 import (
 	"errors"
-	"github.com/infracloudio/msbotbuilder-go/connector/auth"
+	"github.com/risboo6909/msbotbuilder-go/connector/auth"
 	"net/url"
 )
 

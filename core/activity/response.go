@@ -24,15 +24,16 @@ import (
 	"net/url"
 	"path"
 
-	"github.com/infracloudio/msbotbuilder-go/connector/client"
-	"github.com/infracloudio/msbotbuilder-go/schema"
 	"github.com/pkg/errors"
+	"github.com/risboo6909/msbotbuilder-go/connector/client"
+	"github.com/risboo6909/msbotbuilder-go/schema"
 )
 
 // Response provides functionalities to send activity to the connector service.
 type Response interface {
 	SendActivity(activity schema.Activity) error
 	DeleteActivity(activity schema.Activity) error
+	GetSenderInfo(activity schema.Activity) (*schema.ConversationMember, error)
 }
 
 const (

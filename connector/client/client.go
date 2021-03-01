@@ -24,22 +24,24 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/infracloudio/msbotbuilder-go/connector/auth"
-	"github.com/infracloudio/msbotbuilder-go/connector/cache"
-	"github.com/infracloudio/msbotbuilder-go/schema"
-	"github.com/infracloudio/msbotbuilder-go/schema/customerror"
+	"github.com/risboo6909/msbotbuilder-go/connector/auth"
+	"github.com/risboo6909/msbotbuilder-go/connector/cache"
+	"github.com/risboo6909/msbotbuilder-go/schema"
+	"github.com/risboo6909/msbotbuilder-go/schema/customerror"
 )
 
 // Client provides interface to send requests to the connector service.
 type Client interface {
 	Post(url url.URL, activity schema.Activity) error
 	Delete(url url.URL, activity schema.Activity) error
+	Get(url url.URL) ([]byte, error)
 }
 
 // ConnectorClient implements Client to send HTTP requests to the connector service.
@@ -56,6 +58,37 @@ func NewClient(config *Config) (Client, error) {
 	}
 
 	return &ConnectorClient{*config, cache.AuthCache{}}, nil
+}
+
+// Get fetches data from given URL.
+func (client *ConnectorClient) Get(target url.URL) ([]byte, error) {
+
+	token, err := client.getToken()
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", target.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+token)
+
+	httpClient := &http.Client{}
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return body, nil
 }
 
 // Post an activity to given URL.

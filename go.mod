@@ -1,4 +1,4 @@
-module github.com/infracloudio/msbotbuilder-go
+module github.com/risboo6909/msbotbuilder-go
 
 go 1.13
 

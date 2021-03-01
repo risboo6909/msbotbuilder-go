@@ -20,8 +20,8 @@
 package activity
 
 import (
-	"github.com/infracloudio/msbotbuilder-go/schema"
 	"github.com/pkg/errors"
+	"github.com/risboo6909/msbotbuilder-go/schema"
 )
 
 // TurnContext wraps the Activity received and provides operations for the user

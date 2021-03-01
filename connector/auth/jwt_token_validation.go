@@ -28,9 +28,9 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/infracloudio/msbotbuilder-go/connector/cache"
-	"github.com/infracloudio/msbotbuilder-go/schema"
 	"github.com/lestrrat-go/jwx/jwk"
+	"github.com/risboo6909/msbotbuilder-go/connector/cache"
+	"github.com/risboo6909/msbotbuilder-go/schema"
 )
 
 var metadataURL = "https://login.botframework.com/v1/.well-known/openidconfiguration"
